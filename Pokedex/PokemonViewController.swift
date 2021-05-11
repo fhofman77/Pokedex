@@ -54,6 +54,7 @@ class PokemonViewController: UIViewController {
                     self.navigationItem.title = self.capitalize(text: result.name)
                     self.nameLabel.text = self.capitalize(text: result.name)
                     self.numberLabel.text = String(format: "#%03d", result.id)
+//                    self.image.image = UIImage(data: data)  
 
                     for typeEntry in result.types {
                         if typeEntry.slot == 1 {
