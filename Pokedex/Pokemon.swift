@@ -28,3 +28,11 @@ struct PokemonType: Codable {
 struct PokemonImage: Codable {
     let front_default: URL
 }
+
+struct PokemonDescription: Codable {
+    let flavor_text_entries: [FlavorText]
+}
+
+struct FlavorText: Codable {
+    let flavor_text: String
+}

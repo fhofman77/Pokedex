@@ -6,6 +6,7 @@ class PokemonViewController: UIViewController {
     var caught = true
     var pokemonkey = ""
     var pokemonUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+    var descriptionUrl = "https://pokeapi.co/api/v2/pokemon-species/1/"
     
     let listview = PokemonListViewController()
     
@@ -15,6 +16,7 @@ class PokemonViewController: UIViewController {
     @IBOutlet var type2Label: UILabel!
     @IBOutlet var add: UIButton!
     @IBOutlet var image: UIImageView!
+    @IBOutlet weak var descriptionPokemon: UITextView!
     
     func capitalize(text: String) -> String {
         return text.prefix(1).uppercased() + text.dropFirst()
@@ -27,6 +29,7 @@ class PokemonViewController: UIViewController {
         numberLabel.text = ""
         type1Label.text = ""
         type2Label.text = ""
+        descriptionUrl = ""
 
         loadPokemon()
     }
@@ -44,11 +47,12 @@ class PokemonViewController: UIViewController {
                     self.nameLabel.text = self.capitalize(text: result.name)
                     self.numberLabel.text = String(format: "#%03d", result.id)
                     self.pokemonkey = result.name
-                    print(result.sprites.front_default)
                     self.pokemonUrl = result.sprites.front_default.absoluteString
-                    print(self.pokemonUrl)
                     let url = URL(string: self.pokemonUrl)!
                     self.downloadImage(from: url)
+                    
+                    self.descriptionUrl = "https://pokeapi.co/api/v2/pokemon-species/\(result.id)/"
+                    self.loadDescription()
 
 
                     for typeEntry in result.types {
@@ -74,12 +78,31 @@ class PokemonViewController: UIViewController {
         }.resume()
     }
     
+    func loadDescription() {
+        URLSession.shared.dataTask(with: URL(string: descriptionUrl)!) { (data, response, error) in
+            guard let data = data else {
+                return
+            }
+
+            do {
+                let result = try JSONDecoder().decode(PokemonDescription.self, from: data)
+                DispatchQueue.main.async {
+                    self.descriptionPokemon.text = (result.flavor_text_entries[0].flavor_text).replacingOccurrences(of: "\n", with: " ")
+                }
+            }
+            catch let error {
+                print(error)
+            }
+        }.resume()
+    }
+    
+
+    
     @IBAction func toggleCatch() {
         if !caught {
             caught = true
             self.add.setTitle("Release Pokémon", for: UIControl.State.normal)
             UserDefaults.standard.set("true", forKey: pokemonkey)
-            
         }
         else {
             caught = false
@@ -102,3 +125,4 @@ class PokemonViewController: UIViewController {
         }
     }
 }
+
