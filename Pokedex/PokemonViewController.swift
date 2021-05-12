@@ -5,6 +5,7 @@ class PokemonViewController: UIViewController {
 
     var caught = true
     var pokemonkey = ""
+    var pokemonUrl = ""
     
     let listview = PokemonListViewController()
     
@@ -54,11 +55,9 @@ class PokemonViewController: UIViewController {
                     }
                     self.caught = UserDefaults.standard.bool(forKey: self.pokemonkey)
                     if !self.caught {
-                        print("was false")
                         self.add.setTitle("Add to Pokédex", for: UIControl.State.normal)
                     }
                     else {
-                        print("was true")
                         self.add.setTitle("Release Pokémon", for: UIControl.State.normal)
                     }
                 }
@@ -83,5 +82,38 @@ class PokemonViewController: UIViewController {
             
         }
     }
+    
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    
+    func downloadImage(from url: URL) {
+        getData(from: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            DispatchQueue.main.async() { [weak self] in
+                self?.image.image = UIImage(data: data)
+            }
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let url = URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png")!
+        downloadImage(from: url)
+    }
+//    func getImage(pokemonUrl:String , imageView:UIImageView) {
+//        let url:URL = URL(string: pokemonUrl)!
+//        let session = URLSession.shared
+//        let task = session.dataTask(with: url, completionHandler: { (data, _ , Error) in
+//            if data != nil {
+//                let image = UIImage(data: data!)
+//                if image != nil {
+//                    DispatchQueue.main.async(execute: {
+//                        imageView.image = image
+//                    })
+//                }
+//            }
+//        })
+//    }
     
 }

@@ -25,6 +25,6 @@ struct PokemonType: Codable {
     let name: String
 }
 
-//struct PokemonImage: Codable {
-//    let front_default: String
-//}
+struct PokemonImage: Codable {
+    let front_default: String
+}
