@@ -8,8 +8,6 @@ class PokemonViewController: UIViewController {
     var pokemonUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
     var descriptionUrl = "https://pokeapi.co/api/v2/pokemon-species/1/"
     
-    let listview = PokemonListViewController()
-    
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var numberLabel: UILabel!
     @IBOutlet var type1Label: UILabel!
@@ -88,6 +86,7 @@ class PokemonViewController: UIViewController {
                 let result = try JSONDecoder().decode(PokemonDescription.self, from: data)
                 DispatchQueue.main.async {
                     self.descriptionPokemon.text = (result.flavor_text_entries[0].flavor_text).replacingOccurrences(of: "\n", with: " ")
+                    self.descriptionPokemon.contentInset = UIEdgeInsets(top: 20, left: 5, bottom: 5, right: 5)
                 }
             }
             catch let error {
