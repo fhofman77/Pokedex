@@ -5,7 +5,7 @@ class PokemonViewController: UIViewController {
 
     var caught = true
     var pokemonkey = ""
-    var pokemonUrl = ""
+    var pokemonUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
     
     let listview = PokemonListViewController()
     
@@ -44,6 +44,12 @@ class PokemonViewController: UIViewController {
                     self.nameLabel.text = self.capitalize(text: result.name)
                     self.numberLabel.text = String(format: "#%03d", result.id)
                     self.pokemonkey = result.name
+                    print(result.sprites.front_default)
+                    self.pokemonUrl = result.sprites.front_default.absoluteString
+                    print(self.pokemonUrl)
+                    let url = URL(string: self.pokemonUrl)!
+                    self.downloadImage(from: url)
+
 
                     for typeEntry in result.types {
                         if typeEntry.slot == 1 {
@@ -95,25 +101,4 @@ class PokemonViewController: UIViewController {
             }
         }
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let url = URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png")!
-        downloadImage(from: url)
-    }
-//    func getImage(pokemonUrl:String , imageView:UIImageView) {
-//        let url:URL = URL(string: pokemonUrl)!
-//        let session = URLSession.shared
-//        let task = session.dataTask(with: url, completionHandler: { (data, _ , Error) in
-//            if data != nil {
-//                let image = UIImage(data: data!)
-//                if image != nil {
-//                    DispatchQueue.main.async(execute: {
-//                        imageView.image = image
-//                    })
-//                }
-//            }
-//        })
-//    }
-    
 }
