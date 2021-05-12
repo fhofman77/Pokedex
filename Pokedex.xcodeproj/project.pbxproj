@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01A2C559264B01A900F425A1 /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = 01A2C558264B01A900F425A1 /* AppIcon.appiconset */; };
 		9304ABF1236558F1002BD254 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9304ABF0236558F1002BD254 /* Pokemon.swift */; };
 		9371B120231EE27E00A9246F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9371B11F231EE27E00A9246F /* AppDelegate.swift */; };
 		9371B122231EE27E00A9246F /* PokemonListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9371B121231EE27E00A9246F /* PokemonListViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01A2C558264B01A900F425A1 /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; name = AppIcon.appiconset; path = Assets.xcassets/AppIcon.appiconset/iOS/AppIcon.appiconset; sourceTree = "<group>"; };
 		9304ABF0236558F1002BD254 /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
 		9371B11C231EE27E00A9246F /* Pokedex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pokedex.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9371B11F231EE27E00A9246F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				9371B131231EFBEC00A9246F /* PokemonViewController.swift */,
 				9371B123231EE27E00A9246F /* Main.storyboard */,
 				9371B126231EE28000A9246F /* Assets.xcassets */,
+				01A2C558264B01A900F425A1 /* AppIcon.appiconset */,
 				9371B128231EE28000A9246F /* LaunchScreen.storyboard */,
 				9371B12B231EE28000A9246F /* Info.plist */,
 				9304ABF0236558F1002BD254 /* Pokemon.swift */,
@@ -128,6 +131,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01A2C559264B01A900F425A1 /* AppIcon.appiconset in Resources */,
 				9371B12A231EE28000A9246F /* LaunchScreen.storyboard in Resources */,
 				9371B127231EE28000A9246F /* Assets.xcassets in Resources */,
 				9371B125231EE27E00A9246F /* Main.storyboard in Resources */,

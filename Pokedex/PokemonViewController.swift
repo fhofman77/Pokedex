@@ -3,9 +3,8 @@ import UIKit
 class PokemonViewController: UIViewController {
     var url: String!
 
-    var caught: Bool = true
-    
-    let userDefault = UserDefaults()
+    var caught = true
+    var pokemonkey = ""
     
     let listview = PokemonListViewController()
     
@@ -27,17 +26,6 @@ class PokemonViewController: UIViewController {
         numberLabel.text = ""
         type1Label.text = ""
         type2Label.text = ""
-        
-        caught = UserDefaults.standard.bool(forKey: "caught")
-        if caught == false {
-            print("was false")
-            self.add.setTitle("Release Pokémon", for: UIControl.State.normal)
-        }
-        else {
-            print("was true")
-            self.add.setTitle("Add to Pokédex", for: UIControl.State.normal)
-        }
-        
 
         loadPokemon()
     }
@@ -54,7 +42,7 @@ class PokemonViewController: UIViewController {
                     self.navigationItem.title = self.capitalize(text: result.name)
                     self.nameLabel.text = self.capitalize(text: result.name)
                     self.numberLabel.text = String(format: "#%03d", result.id)
-//                    self.image.image = UIImage(data: data)  
+                    self.pokemonkey = result.name
 
                     for typeEntry in result.types {
                         if typeEntry.slot == 1 {
@@ -63,6 +51,15 @@ class PokemonViewController: UIViewController {
                         else if typeEntry.slot == 2 {
                             self.type2Label.text = typeEntry.type.name
                         }
+                    }
+                    self.caught = UserDefaults.standard.bool(forKey: self.pokemonkey)
+                    if !self.caught {
+                        print("was false")
+                        self.add.setTitle("Add to Pokédex", for: UIControl.State.normal)
+                    }
+                    else {
+                        print("was true")
+                        self.add.setTitle("Release Pokémon", for: UIControl.State.normal)
                     }
                 }
             }
@@ -74,17 +71,15 @@ class PokemonViewController: UIViewController {
     
     @IBAction func toggleCatch() {
         if !caught {
-            print("false toggle")
             caught = true
-            self.add.setTitle("Add to Pokédex", for: UIControl.State.normal)
-            UserDefaults.standard.set("true", forKey: "caught")
+            self.add.setTitle("Release Pokémon", for: UIControl.State.normal)
+            UserDefaults.standard.set("true", forKey: pokemonkey)
             
         }
         else {
-            print("true toggle")
             caught = false
-            self.add.setTitle("Release Pokémon", for: UIControl.State.normal)
-            UserDefaults.standard.set("false", forKey: "caught")
+            self.add.setTitle("Add to Pokédex", for: UIControl.State.normal)
+            UserDefaults.standard.set("false", forKey: pokemonkey)
             
         }
     }
