@@ -93,7 +93,7 @@ class PokemonViewController: UIViewController {
                             self.descriptionPokemon.contentInset = UIEdgeInsets(top: 20, left: 5, bottom: 5, right: 5)
                             return
                         }
-                    }                    
+                    }
                 }
             }
             catch let error {
@@ -101,8 +101,6 @@ class PokemonViewController: UIViewController {
             }
         }.resume()
     }
-    
-
     
     @IBAction func toggleCatch() {
         if !caught {
