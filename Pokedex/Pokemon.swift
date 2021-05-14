@@ -35,4 +35,9 @@ struct PokemonDescription: Codable {
 
 struct FlavorText: Codable {
     let flavor_text: String
+    let language: PokemonLanguage
+}
+
+struct PokemonLanguage: Codable {
+    let name: String
 }
