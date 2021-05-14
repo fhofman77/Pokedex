@@ -86,9 +86,7 @@ class PokemonViewController: UIViewController {
                 let result = try JSONDecoder().decode(PokemonDescription.self, from: data)
                 DispatchQueue.main.async {
                     for entry in result.flavor_text_entries  {
-                        print("test \(entry)")
                         if entry.language.name == "en" {
-                            print(entry.flavor_text)
                             self.descriptionPokemon.text = (entry.flavor_text).replacingOccurrences(of: "\n", with: " ")
                             self.descriptionPokemon.contentInset = UIEdgeInsets(top: 20, left: 5, bottom: 5, right: 5)
                             return
